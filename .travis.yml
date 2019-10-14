@@ -16,8 +16,10 @@ before_install:
   - cp /usr/bin/qemu-ppc64le-static .
   - cp /usr/bin/qemu-s390x-static .
   - docker build -f Dockerfile.aarch64 -t moxielogic/aarch64-ci-build-container .
-  - docker build -f Dockerfile.ppc64le -t moxielogic/ppc64le-ci-build-container .
   - docker build -f Dockerfile.s390x -t moxielogic/s390x-ci-build-container .
+
+# ppc64le currently causes an illegal instruction error
+#  - docker build -f Dockerfile.ppc64le -t moxielogic/ppc64le-ci-build-container .
 
 script:
 - 
@@ -25,7 +27,7 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      for ARCH in aarch64 ppc64le s390x; do
+      for ARCH in aarch64 s390x; do
         docker tag moxielogic/${ARCH}-ci-build-container:latest moxielogic/${ARCH}-ci-build-container:$COMMIT;
         docker push moxielogic/${ARCH}-ci-build-container:latest;
         docker push moxielogic/${ARCH}-ci-build-container:$COMMIT;
