@@ -14,9 +14,11 @@ before_install:
   - cp /usr/bin/qemu-arm-static .
   - cp /usr/bin/qemu-aarch64-static .
   - cp /usr/bin/qemu-ppc64le-static .
+  - cp /usr/bin/qemu-s390x-static .
   - docker build -f Dockerfile.arm32 -t moxielogic/arm32-ci-build-container .
   - docker build -f Dockerfile.aarch64 -t moxielogic/aarch64-ci-build-container .
   - docker build -f Dockerfile.ppc64le -t moxielogic/ppc64le-ci-build-container .
+  - docker build -f Dockerfile.s390x -t moxielogic/s390x-ci-build-container .
 
 script:
 - 
@@ -24,7 +26,7 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      for ARCH in arm32 aarch64 ppc64le; do
+      for ARCH in arm32 aarch64 ppc64le s390x; do
         docker tag moxielogic/${ARCH}-ci-build-container:latest moxielogic/${ARCH}-ci-build-container:$COMMIT;
         docker push moxielogic/${ARCH}-ci-build-container:latest;
         docker push moxielogic/${ARCH}-ci-build-container:$COMMIT;
