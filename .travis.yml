@@ -1,0 +1,28 @@
+sudo: required
+
+language: c
+
+env:
+  global:
+     - COMMIT=${TRAVIS_COMMIT::7}
+
+services:
+  - docker
+
+before_install:
+  - docker build -f Dockerfile.arm32 -t libffi/arm32-ci-build-container .
+  - docker build -f Dockerfile.aarch64 -t libffi/aarch64-ci-build-container .
+
+script:
+- 
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+      for ARCH in arm32 aarch64; do
+        docker tag libffi/${ARCH}-ci-build-container:latest libffi/${ARCH}-ci-build-container:$COMMIT;
+        docker push libffi/${ARCH}-ci-build-container:latest;
+        docker push libffi/${ARCH}-ci-build-container:$COMMIT;
+      done;
+    fi
+  - echo All done.
