@@ -1,5 +1,5 @@
 FROM arm32v7/fedora:latest
 
-COPY qemu-arm32v7-static /usr/bin/qemu-arm32v7-static
+COPY qemu-arm-static /usr/bin/qemu-arm-static
 RUN dnf install -y gcc dejagnu make texinfo sharutils gzip git && \
     dnf clean all
