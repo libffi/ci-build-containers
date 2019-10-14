@@ -1,5 +1,5 @@
 FROM aarch64/ubuntu:latest
 
 RUN apt-get update && \
-    apt-get install -y gcc dejagnu make texinfo sharutils gzip git
+    apt-get install -y gcc dejagnu make texinfo sharutils gzip git \
     apt-get clean
