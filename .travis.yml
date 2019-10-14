@@ -10,8 +10,9 @@ services:
   - docker
 
 before_install:
-  - docker build -f Dockerfile.arm32 -t moxielogic/arm32-ci-build-container .
-  - docker build -f Dockerfile.aarch64 -t moxielogic/aarch64-ci-build-container .
+  - apt-get update && apt-get qemu-user-static
+  - docker build -v /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static -f Dockerfile.arm32 -t moxielogic/arm32-ci-build-container .
+  - docker build -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static -f Dockerfile.aarch64 -t moxielogic/aarch64-ci-build-container .
 
 script:
 - 
