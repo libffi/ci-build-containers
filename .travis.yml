@@ -11,6 +11,8 @@ services:
 
 before_install:
   - sudo apt-get install qemu-user-static
+  - cp qemu-arm-static .
+  - cp qemu-aarch64-static .
   - docker build -f Dockerfile.arm32 -t moxielogic/arm32-ci-build-container .
   - docker build -f Dockerfile.aarch64 -t moxielogic/aarch64-ci-build-container .
 
