@@ -1,5 +1,5 @@
 FROM ppc64le/fedora:latest
 
 COPY qemu-ppc64le-static /usr/bin/qemu-ppc64le-static
-RUN dnf install -y gcc dejagnu make texinfo sharutils gzip git && \
+RUN dnf install -y gcc g++ dejagnu make texinfo sharutils gzip git && \
     dnf clean all
