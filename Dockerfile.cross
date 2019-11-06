@@ -3,4 +3,4 @@ FROM ubuntu:latest
 COPY qemu-s390x-static /usr/bin/qemu-s390x-static
 COPY qemu-sh4-static /usr/bin/qemu-sh4-static
 RUN apt-get update && \
-    apt-get install -y g++-8-sh4-linux-gnu g++-8-s390x-linux-gnu git dejagnu autoconf automake libtool make texinfo
+    DEBIAN_FRONTEND=noninteractive apt-get install -y g++-8-sh4-linux-gnu g++-8-s390x-linux-gnu git dejagnu autoconf automake libtool make texinfo
