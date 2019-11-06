@@ -13,6 +13,7 @@ before_install:
   - sudo apt-get install qemu-user-static
   - ls -l /usr/bin/qemu-*-static
   - cp /usr/bin/qemu-s390x-static .
+  - cp /usr/bin/qemu-sh4-static .
   - travis_wait 45 docker build -f Dockerfile.cross -t moxielogic/cross-ci-build-container .
 
 script:
