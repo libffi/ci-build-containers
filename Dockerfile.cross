@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
 COPY qemu-s390x-static /usr/bin/qemu-s390x-static
-COPY qemu-hppa-static /usr/bin/qemu-hppa-static
+COPY qemu-sh4-static /usr/bin/qemu-sh4-static
 RUN apt-get update && \
-    apt-get install -y g++-8-hppa-linux-gnu g++-8-s390x-linux-gnu git dejagnu autoconf automake libtool make texinfo
+    apt-get install -y g++-8-sh4-linux-gnu g++-8-s390x-linux-gnu git dejagnu autoconf automake libtool make texinfo
