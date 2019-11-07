@@ -2,5 +2,8 @@ FROM ubuntu:latest
 
 COPY qemu-s390x-static /usr/bin/qemu-s390x-static
 COPY qemu-sh4-static /usr/bin/qemu-sh4-static
+COPY qemu-hppa-static /usr/bin/qemu-hppa-static
+COPY qemu-m68k-static /usr/bin/qemu-m68k-static
+COPY qemu-alpha-static /usr/bin/qemu-alpha-static
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y g++-8-sh4-linux-gnu g++-8-s390x-linux-gnu git dejagnu autoconf automake libtool make texinfo sharutils
+    DEBIAN_FRONTEND=noninteractive apt-get install -y g++-8-hppa-linux-gnu g++-8-m68k-linux-gnu g++-8-alpha-linux-gnu g++-8-sh4-linux-gnu g++-8-s390x-linux-gnu git dejagnu autoconf automake libtool make texinfo sharutils
